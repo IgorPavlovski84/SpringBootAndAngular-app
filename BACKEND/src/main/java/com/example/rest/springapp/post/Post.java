@@ -15,15 +15,14 @@ public class Post {
     private String title;
     private String body;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-//    private Integer userId;
-    private Set<Integer> userId;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "user_id", nullable = false)
+    private Integer userId;
 
     protected Post() {
     }
 
-    public Post(Integer id, String title, String body, Set<Integer> userId) {
+    public Post(Integer id, String title, String body, Integer userId) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -54,11 +53,11 @@ public class Post {
         this.body = body;
     }
 
-    public Set<Integer> getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Set<Integer> userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
