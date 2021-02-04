@@ -1,15 +1,10 @@
 package com.example.rest.springapp.user;
 
-import com.example.rest.springapp.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -37,7 +32,7 @@ public class UserControler {
 //    }
 
     @RequestMapping(method=RequestMethod.POST, value="/users")
-    public void addTopic(@RequestBody User user) {
+    public void addUser(@RequestBody User user) {
         service.addUser(user);
     }
 

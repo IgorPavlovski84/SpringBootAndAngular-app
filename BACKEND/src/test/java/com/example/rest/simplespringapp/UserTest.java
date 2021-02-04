@@ -1,14 +1,9 @@
 package com.example.rest.simplespringapp;
 
 import com.example.rest.springapp.user.User;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
