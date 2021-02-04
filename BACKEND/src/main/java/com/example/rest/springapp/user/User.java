@@ -1,12 +1,10 @@
 package com.example.rest.springapp.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id

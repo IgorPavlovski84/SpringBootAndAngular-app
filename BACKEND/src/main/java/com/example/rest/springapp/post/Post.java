@@ -2,12 +2,11 @@ package com.example.rest.springapp.post;
 
 import com.example.rest.springapp.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -16,12 +15,15 @@ public class Post {
     private String title;
     private String body;
 
-    private Integer userId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+//    private Integer userId;
+    private Set<Integer> userId;
 
     protected Post() {
     }
 
-    public Post(Integer id, String title, String body, Integer userId) {
+    public Post(Integer id, String title, String body, Set<Integer> userId) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -52,11 +54,11 @@ public class Post {
         this.body = body;
     }
 
-    public Integer getUserId() {
+    public Set<Integer> getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Set<Integer> userId) {
         this.userId = userId;
     }
 
