@@ -19,7 +19,7 @@ public class PostControler {
 
     @GetMapping("/posts/0")
     public Post getPost() {
-        return new Post(0, "Title", "Body of the post" ,1);
+        return new Post(0, "Title", "Body of the post");
     }
 
 

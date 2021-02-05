@@ -1,33 +1,44 @@
 package com.example.rest.springapp.user;
 
+import com.example.rest.springapp.post.Post;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name="user")
 public class User {
 
+
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Long id;
+    @Column(name="name")
     private String name;
+    @Column(name="birthDate")
     private Date birthDate;
 
-    protected User() {
 
+    @OneToMany(mappedBy="user")
+    private List<Post> posts;
+
+
+    protected User() {
     }
 
-    public User(Integer id, String name, Date birthDate) {
+    public User(Long id, String name, Date birthDate) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

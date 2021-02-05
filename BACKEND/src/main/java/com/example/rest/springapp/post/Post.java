@@ -3,38 +3,41 @@ package com.example.rest.springapp.post;
 import com.example.rest.springapp.user.User;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "post")
 public class Post {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue
+    private int postId;
+    @Column(name="title")
     private String title;
+    @Column(name="body")
     private String body;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "user_id", nullable = false)
-    private Integer userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     protected Post() {
     }
 
-    public Post(Integer id, String title, String body, Integer userId) {
-        this.id = id;
+    public Post(int postId, String title, String body) {
+        this.postId = postId;
         this.title = title;
         this.body = body;
-        this.userId = userId;
+        //this.userId = userId;
     }
 
-    public Integer getId() {
-        return id;
+    public int getId() {
+        return postId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(int postId) {
+        this.postId = postId;
     }
 
     public String getTitle() {
@@ -53,21 +56,21 @@ public class Post {
         this.body = body;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+//    public int getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUser(int userId) {
+//        this.userId = userId;
+//    }
 
     @Override
     public String toString() {
         return "Posts{" +
-                "id=" + id +
+                "id=" + postId +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
-                ", userId=" + userId +
+                //", userId=" + userId +
                 '}';
     }
 }
