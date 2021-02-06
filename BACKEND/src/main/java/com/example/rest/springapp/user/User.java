@@ -12,9 +12,9 @@ public class User {
 
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    protected Integer id;
     @Column(name="name")
     private String name;
     @Column(name="birthDate")
@@ -28,17 +28,17 @@ public class User {
     protected User() {
     }
 
-    public User(Long id, String name, Date birthDate) {
+    public User(Integer id, String name, Date birthDate) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

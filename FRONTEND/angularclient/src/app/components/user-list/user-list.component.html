@@ -10,12 +10,17 @@
       </thead>
       <tbody>
       <tr *ngFor="let user of users">
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.birthDate }}</td>
+          <td> {{ user.id }} </td>
+          <td>
+            <a [routerLink]="['/users', user.id]">{{ user.name }}</a>
+          </td>
+          <td>{{ user.birthDate }}</td>
         <button (click) = "onDelete(user.id)"> x (delete)</button>
       </tr>
+
       </tbody>
     </table>
   </div>
+<!--  <div> <app-single-user> </app-single-user></div>-->
+  <router-outlet> </router-outlet>
 </div>

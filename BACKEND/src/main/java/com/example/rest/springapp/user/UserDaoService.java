@@ -11,6 +11,9 @@ public class UserDaoService {
     @Autowired
     private UserRepository userRepository;
 
+//    User user = userRepository.getOne(userId);
+//    post.setUser(user)
+
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         userRepository.findAll()

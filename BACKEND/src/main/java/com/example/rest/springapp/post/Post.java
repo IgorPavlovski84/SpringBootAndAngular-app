@@ -11,7 +11,7 @@ public class Post {
 
     @Id
     @GeneratedValue
-    private int postId;
+    private int id;
     @Column(name="title")
     private String title;
     @Column(name="body")
@@ -19,25 +19,24 @@ public class Post {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "post_id")
     private User user;
 
     protected Post() {
     }
 
     public Post(int postId, String title, String body) {
-        this.postId = postId;
+        this.id = postId;
         this.title = title;
         this.body = body;
-        //this.userId = userId;
     }
 
     public int getId() {
-        return postId;
+        return id;
     }
 
     public void setId(int postId) {
-        this.postId = postId;
+        this.id = postId;
     }
 
     public String getTitle() {
@@ -56,21 +55,12 @@ public class Post {
         this.body = body;
     }
 
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUser(int userId) {
-//        this.userId = userId;
-//    }
-
     @Override
     public String toString() {
         return "Posts{" +
-                "id=" + postId +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
-                //", userId=" + userId +
                 '}';
     }
 }
