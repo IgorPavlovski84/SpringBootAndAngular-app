@@ -1,7 +1,9 @@
 import {Component, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {User} from "../../models/user";
+import { User } from "../../models/user";
 import {UserService} from "../../services/user.service";
+import {PostService} from "../../services/post.service";
 import {ActivatedRoute} from "@angular/router";
+import { Post } from "../../models/post";
 
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
@@ -37,16 +39,24 @@ export class SingleUserComponent implements OnInit {
     "body": "Post Body 3",
     "user_id": 2}
   ]
+  postModel!: Post;
+
+
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
-              private uploadService: UploadService
+              private uploadService: UploadService,
+              private postService: PostService
   ) {
     this.user = new User();
     let broj = Number(this.route.snapshot.params.id);
     this.userService.findUser(broj).subscribe(data => {
       this.user = data;
     });
+    this.postModel = new Post();
+    this.postModel.title = '';
+    this.postModel.body = '';
+    this.postModel.user_id = 1;
   }
 
   ngOnInit() {
@@ -75,10 +85,11 @@ export class SingleUserComponent implements OnInit {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             file.progress = Math.round(event.loaded * 100 / event.total!);
-            break;
+            return null;
           case HttpEventType.Response:
             return event;
         }
+        return null;
       }),
       catchError((error: HttpErrorResponse) => {
         file.inProgress = false;
@@ -98,21 +109,16 @@ export class SingleUserComponent implements OnInit {
     });
   }
 
-  onClick() {
-    // @ts-ignore
-    const fileUpload = this.fileUpload.nativeElement;
-
-    fileUpload.onchange = () => {
-      for (let index = 0; index < fileUpload.files.length; index++)
-      {
-        const file = fileUpload.files[index];
-        // @ts-ignore
-        this.files.push({ data: file, inProgress: false, progress: 0});
-      }
-      this.uploadFiles();
-    };
-    fileUpload.click();
+  onSubmit() {
+    this.postService.postPost(this.postModel)
+      .subscribe(
+        data => console.log('Success!', data),
+        error => console.log('Error!', error)
+      );
+    console.log('PostModel data is: ');
+    console.log(this.postModel);
   }
+
 
 }
 
