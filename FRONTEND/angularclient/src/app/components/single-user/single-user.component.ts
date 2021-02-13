@@ -5,9 +5,6 @@ import {PostService} from "../../services/post.service";
 import {ActivatedRoute} from "@angular/router";
 import { Post } from "../../models/post";
 
-import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
-import { of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { UploadService } from  '../../upload.service';
 
 @Component({
@@ -25,20 +22,6 @@ export class SingleUserComponent implements OnInit {
   newPostFlag: boolean = false;
   showPostsFlag: boolean = false;
   buttonLabel: string = "Click here to create a new post";
-  posts = [
-    {"id": 1,
-    "title": "Post Title 1",
-    "body": "Post Body 1",
-    "user_id": 1},
-    {"id": 2,
-    "title": "Post Title 2",
-    "body": "Post Body 2",
-    "user_id": 1},
-    {"id": 3,
-    "title": "Post Title 3",
-    "body": "Post Body 3",
-    "user_id": 2}
-  ]
   postModel!: Post;
 
 
@@ -56,7 +39,6 @@ export class SingleUserComponent implements OnInit {
     this.postModel = new Post();
     this.postModel.title = '';
     this.postModel.body = '';
-    this.postModel.user_id = 1;
   }
 
   ngOnInit() {
@@ -75,48 +57,13 @@ export class SingleUserComponent implements OnInit {
     this.showPostsFlag = !this.showPostsFlag;
   }
 
-  uploadFile(file: any) {
-    const formData = new FormData();
-    formData.append('file', file.data);
-    file.inProgress = true;
-    // @ts-ignore
-    this.uploadService.upload(formData).pipe(
-      map(event => {
-        switch (event.type) {
-          case HttpEventType.UploadProgress:
-            file.progress = Math.round(event.loaded * 100 / event.total!);
-            return null;
-          case HttpEventType.Response:
-            return event;
-        }
-        return null;
-      }),
-      catchError((error: HttpErrorResponse) => {
-        file.inProgress = false;
-        return of(`${file.data.name} upload failed.`);
-      })).subscribe((event: any) => {
-      if (typeof (event) === 'object') {
-        console.log(event.body);
-      }
-    });
-  }
-
-  private uploadFiles() {
-    // @ts-ignore
-    this.fileUpload.nativeElement.value = '';
-    this.files.forEach(file => {
-      this.uploadFile(file);
-    });
-  }
-
   onSubmit() {
-    this.postService.postPost(this.postModel)
-      .subscribe(
-        data => console.log('Success!', data),
-        error => console.log('Error!', error)
-      );
+    this.user.posts.push(this.postModel);
+    this.userService.save(this.user)
+      .subscribe();
     console.log('PostModel data is: ');
     console.log(this.postModel);
+    console.log(this.user);
   }
 
 

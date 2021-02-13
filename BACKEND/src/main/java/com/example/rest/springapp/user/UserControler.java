@@ -34,6 +34,7 @@ public class UserControler {
 
     @RequestMapping(method=RequestMethod.POST, value="/users")
     public void addUser(@RequestBody User user) {
+
         service.addUser(user);
     }
 

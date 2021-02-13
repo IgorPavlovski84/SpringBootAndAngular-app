@@ -37,7 +37,7 @@
 
 <button (click)="showPosts()" style="padding: 8px; margin: 12px">Click here to view/hide your posts</button>
   <div *ngIf="showPostsFlag" >
-    <div *ngFor="let post of posts">
+    <div *ngFor="let post of user.posts">
       <ul>
         <li>Post ID: {{post.id}}</li>
         <li>Title: {{post.title}}</li>

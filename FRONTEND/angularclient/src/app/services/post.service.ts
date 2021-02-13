@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from '../models/post';
 import { Observable } from 'rxjs/Observable';
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,11 @@ export class PostService {
     this.postsUrl = 'http://localhost:8080/posts';
   }
 
-  public postPost(post: Post) {
-    return this.http.post<Post>(this.postsUrl, post);
+  public postPost(user: User) {
+    return this.http.post<User>(this.postsUrl, user);
   }
 }
+// Post post = postRepository.getOne(postId);
+// user.setPost(post);
+//
+// userRepository.save(user);
