@@ -14,13 +14,15 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCardModule } from "@angular/material/card";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatIconModule } from '@angular/material/icon';
+import { ModalComponent } from './components/single-user/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     UserFormComponent,
-    SingleUserComponent
+    SingleUserComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

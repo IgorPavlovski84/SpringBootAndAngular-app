@@ -10,6 +10,7 @@ import { User } from "../models/user";
 export class PostService {
 
   private postsUrl: string;
+  post!: Observable<Post>;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,6 +22,12 @@ export class PostService {
 
   public postPost(user: User) {
     return this.http.post<User>(this.postsUrl, user);
+  }
+
+  public getPost(id: number) {
+    this.post = this.http.get<Post>(this.postsUrl + "/" + id)
+    console.log(this.post);
+    return this.post;
   }
 }
 // Post post = postRepository.getOne(postId);

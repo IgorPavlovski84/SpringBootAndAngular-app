@@ -2,7 +2,6 @@
 <div class="float-container">
   <div class="float-child">
     <button (click)="newPost()" style="padding: 8px; margin: 12px; width:auto">{{buttonLabel}}</button>
-
     <div style="padding: 8px; margin: 12px">
       <form *ngIf="newPostFlag" #userForm="ngForm" (ngSubmit)="onSubmit()">
 
@@ -22,32 +21,32 @@
         </div>
 
         <div class="form-group">
+<!--          <button (click)="resetForm()">Submit Post</button>-->
           <button>Submit Post</button>
         </div>
 
       </form>
-    <!--  <form *ngIf="newPostFlag">-->
-    <!--    <label for="title">Post Title</label><br>-->
-    <!--    <input type="text" id="title" name="title"><br>-->
-    <!--    <label for="body">Post Body</label><br>-->
-    <!--    <input type="text" id="body" name="body"><br>-->
-    <!--    <input type="submit" value="Add new post" style="padding: 8px; margin: 12px; width:auto">-->
-    <!--  </form>-->
     </div>
   </div>
+
   <div class="float-child">
     <button (click)="showPosts()" style="padding: 8px; margin: 12px">Click here to view/hide your posts</button>
       <div *ngIf="showPostsFlag" >
         <div *ngFor="let post of user.posts">
           <ul class="float-child">
-            <li>Post ID: {{post.id}}</li>
-            <li>Title: {{post.title}}</li>
-            <li>Body: {{post.body}}</li>
+<!--            <li>Post ID: {{post.id}}</li>-->
+<!--            <li>Title: {{post.title}}</li>-->
+<!--            <li>Body: {{post.body}}</li>-->
+            <button (click)="showPost(post.id)"> {{post.title}} </button>
           </ul>
         </div>
       </div>
   </div>
 
 </div>
+<div class="float-child">
+  <app-modal [modalFlag] = "modalFlag" [userInChild]="user" [postInChild]="post"></app-modal>
+</div>
+
 
 
