@@ -1,66 +1,53 @@
 <h2> Welcome User {{user.name}} </h2>
-<button (click)="newPost()" style="padding: 8px; margin: 12px; width:auto">{{buttonLabel}}</button>
+<div class="float-container">
+  <div class="float-child">
+    <button (click)="newPost()" style="padding: 8px; margin: 12px; width:auto">{{buttonLabel}}</button>
 
-<div style="padding: 8px; margin: 12px">
-  <form *ngIf="newPostFlag" #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div style="padding: 8px; margin: 12px">
+      <form *ngIf="newPostFlag" #userForm="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group" >
-      <label>Post Title</label>
-      <input type="text" required #title="ngModel"
-             [class.is-invalid]="title.invalid && title.touched"
-             class="form-control" name="postTitle" [(ngModel)]="postModel.title">
-      <small class="text-danger" [class.d-none]="title.valid || title.untouched">Title of the POST is required!</small>
-    </div>
+        <div class="form-group" >
+          <label>Post Title</label>
+          <input type="text" required #title="ngModel"
+                 [class.is-invalid]="title.invalid && title.touched"
+                 class="form-control" name="postTitle" [(ngModel)]="postModel.title">
+          <small class="text-danger" [class.d-none]="title.valid || title.untouched">Title of the POST is required!</small>
+        </div>
 
-    <div class="form-group" >
-      <label>Post Body</label>
-      <textarea type="text" required #body="ngModel"
-                class="form-control" name="postTitle" [(ngModel)]="postModel.body">
-      </textarea>
-    </div>
+        <div class="form-group" >
+          <label>Post Body</label>
+          <textarea type="text" required #body="ngModel"
+                    class="form-control" name="postTitle" [(ngModel)]="postModel.body">
+          </textarea>
+        </div>
 
-    <div class="form-group">
-      <button>Submit Post</button>
-    </div>
+        <div class="form-group">
+          <button>Submit Post</button>
+        </div>
 
-
-
-  </form>
-<!--  <form *ngIf="newPostFlag">-->
-<!--    <label for="title">Post Title</label><br>-->
-<!--    <input type="text" id="title" name="title"><br>-->
-<!--    <label for="body">Post Body</label><br>-->
-<!--    <input type="text" id="body" name="body"><br>-->
-<!--    <input type="submit" value="Add new post" style="padding: 8px; margin: 12px; width:auto">-->
-<!--  </form>-->
-</div>
-
-<button (click)="showPosts()" style="padding: 8px; margin: 12px">Click here to view/hide your posts</button>
-  <div *ngIf="showPostsFlag" >
-    <div *ngFor="let post of user.posts">
-      <ul>
-        <li>Post ID: {{post.id}}</li>
-        <li>Title: {{post.title}}</li>
-        <li>Body: {{post.body}}</li>
-      </ul>
+      </form>
+    <!--  <form *ngIf="newPostFlag">-->
+    <!--    <label for="title">Post Title</label><br>-->
+    <!--    <input type="text" id="title" name="title"><br>-->
+    <!--    <label for="body">Post Body</label><br>-->
+    <!--    <input type="text" id="body" name="body"><br>-->
+    <!--    <input type="submit" value="Add new post" style="padding: 8px; margin: 12px; width:auto">-->
+    <!--  </form>-->
     </div>
   </div>
-<!--<div style="text-align:center; margin-top: 100px; "><mat-card style="margin-top:10px; width: 50%;">-->
-<!--  <mat-card-content>-->
-<!--    <ul>-->
-<!--      <li *ngFor="let file of files">-->
-<!--        <mat-progress-bar [value]="file.progress"></mat-progress-bar>-->
-<!--        <span id="file-label">-->
+  <div class="float-child">
+    <button (click)="showPosts()" style="padding: 8px; margin: 12px">Click here to view/hide your posts</button>
+      <div *ngIf="showPostsFlag" >
+        <div *ngFor="let post of user.posts">
+          <ul class="float-child">
+            <li>Post ID: {{post.id}}</li>
+            <li>Title: {{post.title}}</li>
+            <li>Body: {{post.body}}</li>
+          </ul>
+        </div>
+      </div>
+  </div>
 
-<!--                    </span>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </mat-card-content>-->
-<!--  <mat-card-actions>-->
-<!--    <button mat-button color="warn" (click)="onClick()">-->
-<!--      <mat-icon>file_upload</mat-icon>-->
-<!--      Upload-->
-<!--    </button>-->
-<!--  </mat-card-actions>-->
-<!--</mat-card><input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" /></div>-->
+</div>
+
 
