@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import { Post } from "../../models/post";
 
 import { UploadService } from  '../../upload.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-single-user',
@@ -16,14 +17,15 @@ import { UploadService } from  '../../upload.service';
 
 export class SingleUserComponent implements OnInit {
 
-  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef | undefined;
-  files  = [];
+  @ViewChild('userForm', {static: false}) userForm!: NgForm;
   user!: User;
   newPostFlag: boolean = false;
   showPostsFlag: boolean = false;
   buttonLabel: string = "Click here to create a new post";
   postModel!: Post;
 
+  modalFlag: boolean =  false;
+  post!: Post;
 
 
   constructor(private userService: UserService,
@@ -61,9 +63,19 @@ export class SingleUserComponent implements OnInit {
     this.user.posts.push(this.postModel);
     this.userService.save(this.user)
       .subscribe();
-    console.log('PostModel data is: ');
-    console.log(this.postModel);
-    console.log(this.user);
+  }
+
+  showPost(id: any) {
+    this.post = new Post();
+    console.log("in the showPost function ...")
+    this.modalFlag = true;
+    this.postService.getPost(id).subscribe(data => {
+      this.post = data;
+    });
+  }
+
+  resetForm() {
+    this.userForm.resetForm();
   }
 
 
